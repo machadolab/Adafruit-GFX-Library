@@ -1,12 +1,20 @@
 #ifndef _ADAFRUIT_GFX_H
 #define _ADAFRUIT_GFX_H
 
+
+#ifdef ARDUINO
 #if ARDUINO >= 100
  #include "Arduino.h"
  #include "Print.h"
 #else
  #include "WProgram.h"
 #endif
+#endif
+
+#ifdef SPARK
+#include "application.h"
+#endif
+
 
 #define swap(a, b) { int16_t t = a; a = b; b = t; }
 
@@ -57,7 +65,7 @@ class Adafruit_GFX : public Print {
     setTextWrap(boolean w),
     setRotation(uint8_t r);
 
-#if ARDUINO >= 100
+#if SPARK || ARDUINO >= 100
   virtual size_t write(uint8_t);
 #else
   virtual void   write(uint8_t);
